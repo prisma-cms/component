@@ -62,6 +62,9 @@ export default class PrismaCmsComponent extends React.Component {
       locales[lang] = this.createLexicon(locale);
     }
 
+    // console.log("locales", locales);
+    // global.component = this;
+
     this.state = {
       ...this.state,
       locales,
@@ -71,15 +74,36 @@ export default class PrismaCmsComponent extends React.Component {
   }
 
 
-  createLexicon(locale){
+  createLexicon(locale) {
 
     return i18n.create(locale);
   }
 
 
-  addLexicon(locale){
+  addLexicon(lang, locale) {
 
-    return i18n.translator.add(locale);
+    const {
+      locales,
+    } = this.state;
+
+
+    if (locales[lang]) {
+
+      locales[lang].translator.add(locale);
+
+      this.state = {
+        locales: {
+          ...locales,
+        },
+      }
+
+      return locales[lang];
+    }
+
+    else {
+      return false;
+    }
+
   }
 
 

@@ -1,3 +1,7 @@
+1.2.1
+=================================
+- Fix PrismaCmsComponent::addLexicon()
+
 1.2.0
 =================================
 - Migrate on @prisma-cms/component-boilerplate
