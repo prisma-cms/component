@@ -86,23 +86,15 @@ export default class PrismaCmsComponent extends React.Component {
       locales,
     } = this.state;
 
-
-    if (locales[lang]) {
-
-      locales[lang].translator.add(locale);
-
-      this.state = {
-        locales: {
-          ...locales,
-        },
-      }
-
-      return locales[lang];
+    if (!locales[lang]) {
+      locales[lang] = this.createLexicon(locale);
     }
 
     else {
-      return false;
+      locales[lang].translator.add(locale);
     }
+
+    return locales[lang];
 
   }
 

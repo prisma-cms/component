@@ -66,10 +66,10 @@ class DevRenderer extends PrismaCmsRenderer {
 
 
 
-  renderMenu() {
+  // renderMenu() {
 
-    return <MainMenu />
-  }
+  //   return <MainMenu />
+  // }
 
 
   renderWrapper() {
