@@ -15,7 +15,9 @@ class DevMainPage extends Page {
     return super.render(
       <App
         {...other}
-      />
+      >
+        Test content
+      </App>
     );
   }
 }

@@ -7,23 +7,11 @@ import Context from '@prisma-cms/context';
 
 import SubscriptionProvider from "./components/SubscriptionProvider";
 import ContextProvider from "./components/ContextProvider";
+import PrismaCmsComponent from './components/Component';
 
 export {
   ContextProvider,
   SubscriptionProvider,
 }
 
-class App extends Component {
-
-  static contextType = Context;
-
-  render() {
-    return (
-      <div>
-        My awesome component
-      </div>
-    );
-  }
-}
-
-export default App;
+export default PrismaCmsComponent;

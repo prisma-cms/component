@@ -1,68 +1,56 @@
-1.3.8
-=================================
-- Added dev pages
-- Added dev styles
-
-1.3.7
-=================================
-- Fix react-router
-
-1.3.6
-=================================
-- Added custom menu
-
-1.3.5
-=================================
-- Fix user query
-- Add deleteUser query
-- Add deleteManyUsers query
-
-1.3.4
-=================================
-- Fix mount App
-
-1.3.3
-=================================
-- Fix contexts 
-
-1.3.2
-=================================
-- Fix contexts
-
-1.3.1
-=================================
-- Fix contexts
-
-1.3.0
-=================================
-- Added ContextProvider
-- Added SubscriptionProvider
-- Added queries
-- Set @prisma-cms/front as dependency
-
-1.2.1
-=================================
-- Added MainMenu
-- Move Renderer in separated file
-
 1.2.0
 =================================
-- Upgrade packages
-- Get apollo-cms apiQuery from generated schema
+- Migrate on @prisma-cms/component-boilerplate
+- Added PrismaCmsComponent::createLexicon()
+- Added PrismaCmsComponent::addLexicon()
+
+1.1.4
+=================================
+- Remove client.clearStore()
+
+1.1.3
+=================================
+- Added resetStore on save object
+
+1.1.2
+=================================
+- Added @prisma-cms/context
+
+1.1.1
+=================================
+- Move @prisma-cms/front into devDependencies
 
 1.1.0
 =================================
-- Added schema generation
+- Use @prisma-cms/front::Context
+
+1.0.11
+=================================
+- Fix renderField
+
+1.0.10
+=================================
+- Fix renderField
+
+1.0.9
+=================================
+- Fix dependencies
+
+1.0.8
+=================================
+- Upgrade react
+
+1.0.7
+=================================
+- Fix errors
 
 1.0.6
 =================================
-- Added styles
+- Fix ::renderField()
 
 1.0.5
 =================================
-- Upgrade React
-- Clean css
-- Move tests into default
+- Added ::getCurrentUser()
 
 1.0.4
 =================================
@@ -70,19 +58,19 @@
 
 1.0.3
 =================================
-- Fix main
+- Fix setFilters
 
 1.0.2
 =================================
-- Fix proxySetup
+- Switch main src to lib
 
 1.0.1
 =================================
-- Fix App render
+- Upgrade @prisma-cms/front
+- Added tests
+- Added filters
 
 1.0.0
 =================================
-- Added App tests
-- Added serviceWorker tests
-- Added proxy tests
-
+- First release
+- Added lexicon
