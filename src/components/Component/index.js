@@ -62,7 +62,7 @@ export default class PrismaCmsComponent extends React.Component {
       locales[lang] = this.createLexicon(locale);
     }
 
-    // console.log("locales", locales);
+
     // global.component = this;
 
     this.state = {
@@ -397,7 +397,7 @@ export default class PrismaCmsComponent extends React.Component {
     // const history = this.getHistory();
 
 
-    // console.log("uri.toString()", uri.toString());
+
 
     // history.push(uri.toString());
 

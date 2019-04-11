@@ -52,7 +52,7 @@ export default class Snackbar extends Component {
               variant="raised"
               size="small"
               onClick={event => {
-                // console.log("click event", event.target);
+
                 event.stopPropagation();
                 event.preventDefault();
                 close && close()
