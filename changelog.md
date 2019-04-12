@@ -1,3 +1,7 @@
+1.2.3
+=================================
+- Fix PrismaCmsComponent::initLocales()
+
 1.2.2
 =================================
 - Fix PrismaCmsComponent::addLexicon()

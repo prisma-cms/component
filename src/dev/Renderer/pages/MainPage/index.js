@@ -14,6 +14,7 @@ class DevMainPage extends Page {
       values: {
         word1: "Слово 1",
         word2: "Слово 2",
+        // "Request error": "Ошибка запроса",
       },
     });
 
@@ -21,6 +22,7 @@ class DevMainPage extends Page {
       values: {
         word1: "word 1",
         word2: "word 2",
+        "Request error": "Request custom error",
       },
     });
 
@@ -47,13 +49,21 @@ class DevMainPage extends Page {
         >
           <Grid
             item
+            xs={12}
           >
-            {this.lexicon("word1")}
+            word1: {this.lexicon("word1")}
           </Grid>
           <Grid
             item
+            xs={12}
           >
-            {this.lexicon("word2")}
+            word2: {this.lexicon("word2")}
+          </Grid>
+          <Grid
+            item
+            xs={12}
+          >
+            Request error: {this.lexicon("Request error")}
           </Grid>
         </Grid>
 
