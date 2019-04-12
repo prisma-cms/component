@@ -1,3 +1,8 @@
+1.2.4
+=================================
+- Added PrismaCmsComponent from Component::renderField();
+- Added PrismaCmsComponent from Component::Snackbar;
+
 1.2.3
 =================================
 - Fix PrismaCmsComponent::initLocales()

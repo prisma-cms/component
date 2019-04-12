@@ -11,7 +11,7 @@ class DevPageLayout extends PrismaCmsComponent {
 
   render(content = null) {
 
-    return content;
+    return super.render(content);
   }
 }
 

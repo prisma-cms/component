@@ -74,25 +74,25 @@ export default class PrismaCmsComponent extends React.Component {
 
     this.initLocales(defaultLocales);
 
-    if(locales) {
+    if (locales) {
       this.initLocales(locales);
     }
 
   }
 
 
-  initLocales(locales){
+  initLocales(locales) {
 
     for (var lang in locales) {
 
       let locale = locales[lang];
 
-      if(locale) {
+      if (locale) {
         this.addLexicon(lang, locale);
       }
 
     }
-    
+
   }
 
 
@@ -282,9 +282,10 @@ export default class PrismaCmsComponent extends React.Component {
       // ...other,
     } = field;
 
-    const {
+    let {
       key,
       name,
+      label,
       helperText,
       onFocus,
       ...other
@@ -294,11 +295,18 @@ export default class PrismaCmsComponent extends React.Component {
 
     // return field;
 
+    helperText = error ? error.message : helperText;
+
+    if (helperText) {
+      helperText = this.lexicon(helperText);
+    }
+
     return <Field
       key={key}
       name={name}
       error={error ? true : false}
-      helperText={error ? error.message : helperText}
+      helperText={helperText}
+      label={label ? this.lexicon(label) : label}
       onFocus={event => {
         const {
           errors,
@@ -519,7 +527,7 @@ export default class PrismaCmsComponent extends React.Component {
 
         <Snackbar
           opened={error ? true : false}
-          message={error || ""}
+          message={error ? this.lexicon(error) : ""}
           close={() => {
             this.setState({
               error: null,

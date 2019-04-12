@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import Page from "../layout";
 import App from '../../../../App';
-import { Typography } from 'material-ui';
+import { Typography, TextField } from 'material-ui';
+import { Button } from 'material-ui';
 
 class DevMainPage extends Page {
 
@@ -15,6 +16,10 @@ class DevMainPage extends Page {
         word1: "Слово 1",
         word2: "Слово 2",
         // "Request error": "Ошибка запроса",
+        helperText: "Подсказка",
+        Label: "Название поля",
+        "Show error": "Показать ошибку",
+        "Test error": "Тестовое сообщение",
       },
     });
 
@@ -23,6 +28,7 @@ class DevMainPage extends Page {
         word1: "word 1",
         word2: "word 2",
         "Request error": "Request custom error",
+        helperText: "Hint",
       },
     });
 
@@ -65,6 +71,30 @@ class DevMainPage extends Page {
           >
             Request error: {this.lexicon("Request error")}
           </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            Text field: {this.renderField(<TextField
+              label="Label"
+              helperText="helperText"
+            />)}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            Show error: <Button
+              onClick={event => {
+                this.addError("Test error")
+              }}
+            >
+              {this.lexicon("Show error")}
+            </Button>
+          </Grid>
+
         </Grid>
 
       </App>
