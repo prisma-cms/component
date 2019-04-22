@@ -1,3 +1,7 @@
+1.2.5
+=================================
+- Fix onChange number fileds
+
 1.2.4
 =================================
 - Added PrismaCmsComponent from Component::renderField();

@@ -334,15 +334,33 @@ export default class PrismaCmsComponent extends React.Component {
 
   onChange(event) {
 
-    const {
+    let {
       name,
       value,
+      type,
+      checked,
     } = event.target;
 
 
+    switch (type) {
+
+      case "boolean":
+      case "checkbox":
+
+        value = checked;
+        break;
+
+      case "number":
+
+        value = Number(value);
+
+        break;
+
+    }
 
     this.updateObject({
-      [name]: value ? value : null,
+      // [name]: value ? value : null,
+      [name]: value,
     });
 
   }

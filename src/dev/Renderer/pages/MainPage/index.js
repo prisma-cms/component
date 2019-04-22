@@ -44,6 +44,8 @@ class DevMainPage extends Page {
       Grid,
     } = this.context;
 
+    // console.log("this.state", { ...this.state });
+
     return super.render(
       <App
         {...other}
@@ -79,6 +81,19 @@ class DevMainPage extends Page {
             Text field: {this.renderField(<TextField
               label="Label"
               helperText="helperText"
+            />)}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            Number field: {this.renderField(<TextField
+              label="Number Label"
+              helperText="helperText"
+              type="number"
+              name="numberField"
+              onChange={event => this.onChange(event)}
             />)}
           </Grid>
 
