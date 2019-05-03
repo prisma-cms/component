@@ -512,6 +512,37 @@ export default class PrismaCmsComponent extends React.Component {
 
   canEdit() {
 
+    const {
+      object,
+    } = this.props.data || {};
+
+    const {
+      id: objectId,
+      CreatedBy,
+    } = object || {};
+
+
+    const {
+      id: currentUserId,
+      sudo,
+    } = this.getCurrentUser() || {};
+
+    const {
+      id: createdById,
+    } = CreatedBy || {};
+
+
+    if (objectId) {
+
+      if (sudo || (createdById && createdById === currentUserId)) {
+        return true;
+      }
+
+    }
+    else {
+      return true;
+    }
+
     return false;
   }
 
