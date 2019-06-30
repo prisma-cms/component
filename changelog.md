@@ -1,3 +1,7 @@
+1.3.0
+=================================
+- Became Component extends PureComponent
+
 1.2.6
 =================================
 - Fix canEdit()
