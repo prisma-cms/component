@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import Snackbar from '../Snackbar';
@@ -19,7 +19,7 @@ const defaultLocales = {
   },
 };
 
-export default class PrismaCmsComponent extends React.Component {
+export default class PrismaCmsComponent extends PureComponent {
 
 
   static contextType = Context;

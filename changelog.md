@@ -1,3 +1,7 @@
+1.3.1
+=================================
+- Fix PureComponent
+
 1.3.0
 =================================
 - Became Component extends PureComponent
