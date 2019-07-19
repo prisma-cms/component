@@ -50,6 +50,10 @@ class DevMainPage extends Page {
 
     // console.log("this.state", { ...this.state });
 
+    const {
+      numberField,
+      numberField3,
+    } = this.state._dirty || {};
 
 
     return super.render(
@@ -155,8 +159,39 @@ class DevMainPage extends Page {
               helperText="helperText"
               type="number"
               name="numberField"
-              // onChange={event => this.onChange(event)}
-              onChange={this.forceUpdateBind}
+              value={numberField || ""}
+            // onChange={event => this.onChange(event)}
+            // onChange={this.forceUpdateBind}
+            />)}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            PureTextField via this.renderField 2: {this.renderField(<PureTextField
+              label="Number Label"
+              helperText="helperText"
+              type="number"
+              name="numberField"
+              value={numberField || ""}
+            // onChange={event => this.onChange(event)}
+            // onChange={this.forceUpdateBind}
+            />)}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            PureTextField via this.renderField 3: {this.renderField(<PureTextField
+              label="Number Label"
+              helperText="helperText"
+              type="number"
+              name="numberField3"
+              value={numberField3 || ""}
+            // onChange={event => this.onChange(event)}
+            // onChange={this.forceUpdateBind}
             />)}
           </Grid>
 

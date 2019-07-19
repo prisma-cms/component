@@ -72,6 +72,7 @@ export default class PrismaCmsComponent extends PureComponent {
       ...this.state,
       locales: {},
       filters,
+      errors: [],
     }
 
     this.initLocales(defaultLocales);
@@ -268,7 +269,7 @@ export default class PrismaCmsComponent extends PureComponent {
       name,
       label,
       helperText,
-      onFocus,
+      // onFocus,
       ...other
     } = props;
 
@@ -288,26 +289,27 @@ export default class PrismaCmsComponent extends PureComponent {
       error={error ? true : false}
       helperText={helperText}
       label={label ? this.lexicon(label) : label}
-      onFocus={event => {
-        const {
-          errors,
-        } = this.state;
+      // onFocus={event => {
+      //   const {
+      //     errors,
+      //   } = this.state;
 
-        if (errors) {
-          const index = errors.findIndex(({ key }) => key === name);
+      //   if (errors) {
+      //     const index = errors.findIndex(({ key }) => key === name);
 
-          if (index !== -1) {
-            errors.splice(index, 1);
-            this.setState({
-              errors,
-            });
-          }
-        }
+      //     if (index !== -1) {
+      //       errors.splice(index, 1);
+      //       this.setState({
+      //         errors,
+      //       });
+      //     }
+      //   }
 
-        return onFocus ? onFocus(event) : false;
+      //   return onFocus ? onFocus(event) : false;
 
-      }}
-      onChange={event => this.onChange(event)}
+      // }}
+      onFocus={this.onFocusBind}
+      onChange={this.onChangeBind}
       {...other}
     />;
   }
@@ -347,14 +349,62 @@ export default class PrismaCmsComponent extends PureComponent {
   }
 
 
+  onChangeBind = event => this.onChange(event);
+
+
+  onFocus(event) {
+
+    const {
+      name,
+    } = event.target;
+
+    if (name) {
+
+      this.resetError(name);
+
+    }
+
+    return;
+  }
+
+  onFocusBind = event => this.onFocus(event);
+
+
+  resetError(name) {
+
+    const {
+      errors,
+    } = this.state;
+
+    if (errors) {
+      const index = errors.findIndex(({ key }) => key === name);
+
+      if (index !== -1) {
+
+        let newErrors = errors.slice(0);
+
+        newErrors.splice(index, 1);
+
+        this.setState({
+          errors: newErrors,
+        });
+      }
+    }
+
+  }
+
+
   updateObject(data) {
 
     const {
-      _dirty = {},
+      _dirty,
     } = this.state;
 
     this.setState({
-      _dirty: Object.assign({ ..._dirty }, data),
+      _dirty: {
+        ..._dirty,
+        ...data,
+      },
     });
 
   }
@@ -587,8 +637,9 @@ export default class PrismaCmsComponent extends PureComponent {
 
     notifications.push(error);
 
-    setTimeout(() => this.closeError(error), errorDelay);
-
+    if (errorDelay) {
+      setTimeout(() => this.closeError(error), errorDelay);
+    }
 
     this.setState({
       notifications,

@@ -1,5 +1,7 @@
+1.4.0
 =================================
-- Fix renderFields()
+- Fix renderFields();
+- Fix renderField performance
 
 1.3.1
 =================================
