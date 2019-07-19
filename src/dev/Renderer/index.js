@@ -8,8 +8,8 @@ import App, {
 
 import { Renderer as PrismaCmsRenderer } from '@prisma-cms/front'
 
-import MainMenu from './MainMenu';
-import { withStyles } from 'material-ui';
+// import MainMenu from './MainMenu';
+import withStyles from 'material-ui/styles/withStyles';
 import DevMainPage from './pages/MainPage';
 
 

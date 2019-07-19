@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import Page from "../layout";
 import App from '../../../../App';
-import { Typography, TextField } from 'material-ui';
-import { Button } from 'material-ui';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
+import PureTextField from './PureTextField';
 
 class DevMainPage extends Page {
 
@@ -34,6 +35,9 @@ class DevMainPage extends Page {
 
   }
 
+
+  forceUpdateBind = () => this.forceUpdate();
+
   render() {
 
     const {
@@ -45,6 +49,8 @@ class DevMainPage extends Page {
     } = this.context;
 
     // console.log("this.state", { ...this.state });
+
+
 
     return super.render(
       <App
@@ -78,6 +84,21 @@ class DevMainPage extends Page {
             item
             xs={12}
           >
+
+            {/* PureDiv: {this.renderField(pureDiv)} */}
+
+            {/* PureDiv 2: {this.renderField(<div>
+              Pure div 2
+            </div>)} */}
+
+          </Grid>
+
+
+          {/* 
+          <Grid
+            item
+            xs={12}
+          >
             Text field: {this.renderField(<TextField
               label="Label"
               helperText="helperText"
@@ -94,6 +115,48 @@ class DevMainPage extends Page {
               type="number"
               name="numberField"
               onChange={event => this.onChange(event)}
+            />)}
+          </Grid> */}
+
+          <Grid
+            item
+            xs={12}
+          >
+            PureTextField: <PureTextField
+              label="Number Label"
+              helperText="helperText"
+              type="number"
+              name="numberField"
+              // onChange={event => this.onChange(event)}
+              onChange={this.forceUpdateBind}
+            />
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            PureTextField 2: <PureTextField
+              label="Number Label 2"
+              helperText="helperText"
+              type="number"
+              name="numberField"
+              // onChange={event => this.onChange(event)}
+              onChange={this.forceUpdateBind}
+            />
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            PureTextField via this.renderField: {this.renderField(<PureTextField
+              label="Number Label"
+              helperText="helperText"
+              type="number"
+              name="numberField"
+              // onChange={event => this.onChange(event)}
+              onChange={this.forceUpdateBind}
             />)}
           </Grid>
 

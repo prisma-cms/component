@@ -28,10 +28,12 @@ export default class PrismaCmsComponent extends PureComponent {
   static proptTypes = {
     locales: PropTypes.object,
     filters: PropTypes.object,
+    errorDelay: PropTypes.number.isRequired,
   }
 
   static defaultProps = {
     // locales: defaultLocales,
+    errorDelay: 5000,
   }
 
 
@@ -135,27 +137,6 @@ export default class PrismaCmsComponent extends PureComponent {
 
   }
 
-
-  addError(error) {
-
-    error = this.lexicon(error || "Request error");
-
-    this.setState({
-      error,
-    }, () => {
-      setTimeout(() => {
-
-        // Проверка не очень надежная, так как строки не учитывают инстанс,
-        // но это лучше, чем ничего.
-        if (error === this.state.error) {
-          this.setState({
-            error: null,
-          });
-        }
-
-      }, 5000);
-    });
-  }
 
 
   query(params) {
@@ -557,6 +538,214 @@ export default class PrismaCmsComponent extends PureComponent {
   }
 
 
+
+  // addError(error) {
+
+  //   error = this.lexicon(error || "Request error");
+
+  //   this.setState({
+  //     error,
+  //   }, () => {
+  //     setTimeout(() => {
+
+  //       // Проверка не очень надежная, так как строки не учитывают инстанс,
+  //       // но это лучше, чем ничего.
+  //       if (error === this.state.error) {
+  //         this.setState({
+  //           error: null,
+  //         });
+  //       }
+
+  //     }, 5000);
+  //   });
+  // }
+
+
+
+
+  addError(error) {
+
+    const {
+      errorDelay,
+    } = this.props;
+
+    if (typeof error !== "object") {
+      error = {
+        message: error,
+      };
+    }
+
+    Object.assign(error, {
+      _id: new Date().getTime(),
+    });
+
+    const {
+      notifications: oldNotifications,
+    } = this.state;
+
+    let notifications = (oldNotifications || []).slice(0);
+
+    notifications.push(error);
+
+    setTimeout(() => this.closeError(error), errorDelay);
+
+
+    this.setState({
+      notifications,
+    });
+
+    return error;
+
+  }
+
+
+  removeError(error) {
+
+    const {
+      notifications: oldNotifications,
+    } = this.state;
+
+    if (oldNotifications && oldNotifications.length) {
+
+      const notifications = oldNotifications.slice(0);
+
+      const index = notifications.indexOf(error);
+
+      if (index !== -1) {
+
+        notifications.splice(index, 1);
+
+        this.setState({
+          notifications,
+        });
+
+      }
+
+    }
+
+  }
+
+
+  closeError(error) {
+
+    // let {
+    //   errors,
+    // } = this.state;
+
+    Object.assign(error, {
+      open: false,
+    });
+
+    // console.log("click event 2", error, this.state.notifications);
+
+    this.forceUpdate();
+
+    setTimeout(() => {
+      this.removeError(error);
+    }, 2000)
+
+  }
+
+
+  closeErrorBind = error => this.closeError(error);
+
+
+  renderErrors() {
+
+    // const {
+    //   errorDelay,
+    // } = this.props;
+
+    const {
+      notifications,
+    } = this.state;
+
+    if (notifications && notifications.length) {
+
+      // let output = null;
+
+      let errors = notifications.map((error, index) => {
+
+        let {
+          _id,
+          message,
+          open = true,
+        } = error;
+
+        if (!message) {
+          return null;
+        }
+
+        return <Snackbar
+          key={_id}
+          // opened={error ? true : false}
+          opened={open}
+          error={error}
+          message={this.lexicon(message)}
+          // close={this.closeErrorBind("error")}
+          close={this.closeErrorBind}
+        />
+
+        // return <Snackbar
+        //   key={_id}
+        //   open={open}
+        //   autoHideDuration={errorDelay}
+        //   SnackbarContentProps={{
+        //   }}
+        //   anchorOrigin={{
+        //     vertical: "top",
+        //     horizontal: "center",
+        //   }}
+        //   message={<span
+        //   // id="snackbar-fab-message-id"
+        //   >
+        //     {message}
+        //   </span>}
+        //   action={
+        //     <Fragment>
+
+        //       <Button
+        //         color="primary"
+        //         variant="raised"
+        //         size="small"
+        //         onClick={event => {
+        //           // console.log("click event", event.target);
+        //           event.stopPropagation();
+        //           this.closeError(error)
+        //         }}
+        //       >
+        //         Отмена
+        //     </Button>
+
+        //     </Fragment>
+        //   }
+        // />
+
+      });
+
+      // const {
+      //   document,
+      // } = global;
+
+      // if (document.createRange) {
+      //   output = ReactDOM.createPortal(<Fragment
+      //   >
+      //     {errors}
+      //   </Fragment>, window.document.body);
+      // }
+      // else {
+      //   output = errors;
+      // }
+
+      return errors;
+
+    }
+    else {
+      return null;
+    }
+
+  }
+
   render(content) {
 
     const {
@@ -574,7 +763,7 @@ export default class PrismaCmsComponent extends PureComponent {
 
         {children}
 
-        <Snackbar
+        {/* <Snackbar
           opened={error ? true : false}
           message={error ? this.lexicon(error) : ""}
           close={() => {
@@ -582,7 +771,9 @@ export default class PrismaCmsComponent extends PureComponent {
               error: null,
             })
           }}
-        />
+        /> */}
+
+        {this.renderErrors()}
 
       </Fragment>
     )

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import ReactDOM from 'react-dom';
@@ -6,13 +6,38 @@ import ReactDOM from 'react-dom';
 import SnackbarUI from 'material-ui/Snackbar';
 import Button from 'material-ui/Button';
 
-export default class Snackbar extends Component {
+export default class Snackbar extends PureComponent {
 
   static propTypes = {
+    error: PropTypes.object,
     opened: PropTypes.bool.isRequired,
     message: PropTypes.string.isRequired,
     close: PropTypes.func,
   }
+
+
+  // componentDidUpdate(prevProps, prevState) {
+
+  //   const keys = Object.keys(this.props);
+
+  //   keys.map(key => {
+
+  //     const value = this.props[key];
+
+  //     const prevValue = prevProps[key];
+
+  //     if (value !== undefined && prevValue !== undefined && value !== prevValue) {
+
+  //       console.log("Snackbar componentDidUpdate value !== prevValue / ", key, value, prevValue);
+
+  //     }
+
+  //   });
+
+  //   super.componentDidUpdate && super.componentDidUpdate(prevProps, prevState);
+
+  // }
+
 
   render() {
 
@@ -24,6 +49,7 @@ export default class Snackbar extends Component {
       message,
       close,
       opened,
+      error,
       ...other
     } = this.props;
     return ReactDOM.createPortal(
@@ -55,7 +81,7 @@ export default class Snackbar extends Component {
 
                 event.stopPropagation();
                 event.preventDefault();
-                close && close()
+                close && close(error)
               }}
             >
               Close
