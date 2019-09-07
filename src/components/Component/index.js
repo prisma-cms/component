@@ -29,6 +29,8 @@ export default class PrismaCmsComponent extends PureComponent {
     locales: PropTypes.object,
     filters: PropTypes.object,
     errorDelay: PropTypes.number.isRequired,
+    data: PropTypes.object,
+    object: PropTypes.object,
   }
 
   static defaultProps = {
@@ -177,7 +179,7 @@ export default class PrismaCmsComponent extends PureComponent {
     const result = await client[method](params)
       .catch(error => {
 
-        error.message = error.message && error.message.replace(/^GraphQL error: */, '') || "";
+        error.message = (error.message && error.message.replace(/^GraphQL error: */, '')) || "";
 
         return error;
       });
@@ -203,7 +205,7 @@ export default class PrismaCmsComponent extends PureComponent {
         success,
         message,
         errors: responseErrors,
-        ...other
+        // ...other
       } = response || {};
 
       errors = responseErrors;
@@ -338,6 +340,8 @@ export default class PrismaCmsComponent extends PureComponent {
         value = Number(value);
 
         break;
+
+      default: ;
 
     }
 
@@ -543,38 +547,60 @@ export default class PrismaCmsComponent extends PureComponent {
 
   canEdit() {
 
-    const {
-      object,
-    } = this.props.data || {};
+    // const {
+    //   object,
+    // } = this.props.data || {};
 
-    const {
-      id: objectId,
-      CreatedBy,
-    } = object || {};
+    const object = this.getObject();
 
+    if (object) {
 
-    const {
-      id: currentUserId,
-      sudo,
-    } = this.getCurrentUser() || {};
-
-    const {
-      id: createdById,
-    } = CreatedBy || {};
+      const {
+        id: objectId,
+        CreatedBy,
+      } = object;
 
 
-    if (objectId) {
+      const {
+        id: currentUserId,
+        sudo,
+      } = this.getCurrentUser() || {};
 
-      if (sudo || (createdById && createdById === currentUserId)) {
+      const {
+        id: createdById,
+      } = CreatedBy || {};
+
+
+      if (objectId) {
+
+        if (sudo || (createdById && createdById === currentUserId)) {
+          return true;
+        }
+
+      }
+      else {
         return true;
       }
 
     }
-    else {
-      return true;
-    }
+
 
     return false;
+  }
+
+
+  getObject() {
+
+    const {
+      data,
+      object,
+    } = this.props;
+
+    // const {
+    //   object,
+    // } = data || {};
+
+    return object !== undefined ? object : (data && data.object) || null;
   }
 
 
@@ -799,9 +825,11 @@ export default class PrismaCmsComponent extends PureComponent {
 
   render(content) {
 
-    const {
-      error,
-    } = this.state;
+    // const {
+    //   error,
+    // } = this.state;
+
+    this.canEdit();
 
     const {
       children,

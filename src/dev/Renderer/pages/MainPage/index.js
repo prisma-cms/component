@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Page from "../layout";
 import App from '../../../../App';
-import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import PureTextField from './PureTextField';
 

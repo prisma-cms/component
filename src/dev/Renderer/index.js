@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 
 import App, {
@@ -36,6 +36,7 @@ class DevRenderer extends PrismaCmsRenderer {
 
 
   static propTypes = {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     ...PrismaCmsRenderer.propTypes,
     pure: PropTypes.bool.isRequired,
   }
