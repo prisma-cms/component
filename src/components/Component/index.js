@@ -14,7 +14,10 @@ import Context from '@prisma-cms/context';
 const defaultLocales = {
   ru: {
     values: {
+      "Error": "Ошибка",
+      "Errors": "Ошибки",
       "Request error": "Ошибка выполнения запроса",
+      "Check required forms fill in": "Проверьте правильность заполнения формы",
     }
   },
 };
