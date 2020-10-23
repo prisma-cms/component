@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import Context from "@prisma-cms/context";
 
 import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
@@ -93,16 +92,11 @@ export class MainMenu extends Component {
     } = this.context;
 
     const {
-      // opened,
-    } = this.state;
-
-    const {
       classes,
     } = this.props;
 
     const {
       id: userId,
-      sudo,
     } = user || {}
 
     return (

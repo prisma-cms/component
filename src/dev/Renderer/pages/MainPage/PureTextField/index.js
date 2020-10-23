@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 
 class PureTextField extends PureComponent {
@@ -23,6 +22,7 @@ class PureTextField extends PureComponent {
 
       }
 
+      return null;
     });
 
     super.componentDidUpdate && super.componentDidUpdate(prevProps, prevState);

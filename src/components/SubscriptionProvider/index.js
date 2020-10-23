@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import gql from "graphql-tag";
 
@@ -102,6 +101,7 @@ export default class SubscriptionProvider extends Component {
 
         subscriptions.map(n => {
           n.unsubscribe();
+          return null;
         });
 
         Object.assign(this.state, {
