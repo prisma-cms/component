@@ -32,7 +32,7 @@ const defaultLocales = {
 
 export default class PrismaCmsComponent<
   P extends PrismaCmsComponentProps = PrismaCmsComponentProps,
-  S extends PrismaCmsComponentState = any
+  S extends PrismaCmsComponentState = PrismaCmsComponentState
 > extends PureComponent<P, S> {
   static contextType = Context
 
