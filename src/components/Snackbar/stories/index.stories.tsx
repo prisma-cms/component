@@ -15,7 +15,7 @@ import {
 
 import Component, { SnackbarProps as ComponentProps } from '../'
 
-const title = 'Snackbar'
+const title = '@prisma-cms/component/Snackbar'
 
 export const Snackbar: React.FC<ComponentProps> = (props) => {
   const { message, ...other } = props

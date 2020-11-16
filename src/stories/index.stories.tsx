@@ -17,7 +17,7 @@ import Context from '@prisma-cms/context'
 
 import Component, { PrismaCmsComponentProps as ComponentProps } from '../'
 
-const title = 'PrismaCmsComponent'
+const title = '@prisma-cms/component/component'
 
 interface ComponentPropsCustom extends ComponentProps {
   message: string
