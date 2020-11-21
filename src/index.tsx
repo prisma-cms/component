@@ -63,6 +63,9 @@ export default class PrismaCmsComponent<
       notifications: [],
     }
 
+    this.canEdit = this.canEdit.bind(this);
+    this.getObject = this.getObject.bind(this);
+
     this.initLocales(defaultLocales)
 
     // if (locales) {
