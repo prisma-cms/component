@@ -33,7 +33,7 @@ const defaultLocales = {
 export default class PrismaCmsComponent<
   P extends PrismaCmsComponentProps = PrismaCmsComponentProps,
   S extends PrismaCmsComponentState = PrismaCmsComponentState
-> extends PureComponent<P, S> {
+  > extends PureComponent<P, S> {
   static contextType = Context
 
   // static proptTypes = {
@@ -65,6 +65,8 @@ export default class PrismaCmsComponent<
 
     this.canEdit = this.canEdit.bind(this);
     this.getObject = this.getObject.bind(this);
+    this.updateObject = this.updateObject.bind(this)
+    this.mutate = this.mutate.bind(this)
 
     this.initLocales(defaultLocales)
 
@@ -293,15 +295,35 @@ export default class PrismaCmsComponent<
     }
   }
 
-  updateObject(data: Record<string, any>) {
+  updateObject(data: P["_dirty"]) {
     const { _dirty } = this.state
+    const { onChange } = this.props;
 
-    this.setState({
-      _dirty: {
-        ..._dirty,
-        ...data,
-      },
+    const newDirty = this.prepareDirty(data ? {
+      ..._dirty,
+      ...data,
+    } : data);
+
+    const newState = this.prepareNewState({
+      _dirty: newDirty,
+    });
+
+    this.setState(newState, () => {
+      onChange && onChange(newDirty);
     })
+  }
+
+  prepareDirty(data: P["_dirty"]) {
+
+    return data;
+  }
+
+  prepareNewState(newState: {
+    _dirty: P["_dirty"]
+  }): any {
+
+    // TODO Return partial state
+    return newState;
   }
 
   getHistory() {

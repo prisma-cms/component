@@ -23,11 +23,15 @@ export interface PrismaCmsComponentProps {
 
   object?: Record<string, any> | null | undefined
 
+  _dirty?: Partial<PrismaCmsComponentProps["object"]>
+
   filters?: Record<string, any> | undefined
 
   locales?: Locales
 
   errorDelay?: number
+
+  onChange?: (data: Partial<PrismaCmsComponentProps["object"]>) => void
 }
 
 export interface PrismaCmsComponentState {
@@ -43,5 +47,6 @@ export interface PrismaCmsComponentState {
 
   loading: boolean
 
-  _dirty?: Record<string, any> | null | undefined
+  // _dirty?: Record<string, any> | null | undefined
+  _dirty?: PrismaCmsComponentProps["_dirty"]
 }
