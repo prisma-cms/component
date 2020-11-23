@@ -31,7 +31,7 @@ export interface PrismaCmsComponentProps {
 
   errorDelay?: number
 
-  onChange?: (data: Partial<PrismaCmsComponentProps["object"]>) => void
+  // onChange?: (data: Partial<PrismaCmsComponentProps["object"]>) => void
 }
 
 export interface PrismaCmsComponentState {

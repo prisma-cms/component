@@ -297,7 +297,7 @@ export default class PrismaCmsComponent<
 
   updateObject(data: P["_dirty"]) {
     const { _dirty } = this.state
-    const { onChange } = this.props;
+    // const { onChange } = this.props;
 
     const newDirty = this.prepareDirty(data ? {
       ..._dirty,
@@ -308,9 +308,11 @@ export default class PrismaCmsComponent<
       _dirty: newDirty,
     });
 
-    this.setState(newState, () => {
-      onChange && onChange(newDirty);
-    })
+    // this.setState(newState, () => {
+    //   onChange && onChange(newDirty);
+    // })
+
+    this.setState(newState)
   }
 
   prepareDirty(data: P["_dirty"]) {
