@@ -41,6 +41,7 @@
     "urijs": "^1.19.2"
   },
   "devDependencies": {
+    "@apollo/client": "^3.2.5",
     "@next/bundle-analyzer": "^9.5.5",
     "@storybook/addon-actions": "^6.0.28",
     "@storybook/addon-docs": "^6.0.28",

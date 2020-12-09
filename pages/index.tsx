@@ -30,21 +30,26 @@ const MainPage: React.FC = (props) => {
         <meta name="description" content="Component for prisma-cms" />
       </Head>
       <App object={null} {...props}>
-        <Context.Provider
-          value={{
-            content: 'content',
-          }}
-        >
-          Some content{' '}
-          <Context.Consumer>
-            {(context) => {
-              return context.content
-            }}
-          </Context.Consumer>
-          <div>
-            <InnerComponent object={null}>InnerComponent</InnerComponent>
-          </div>
-        </Context.Provider>
+        <Context.Consumer>
+          {(context) => (
+            <Context.Provider
+              value={{
+                ...context,
+                content: 'content',
+              }}
+            >
+              Some content{' '}
+              <Context.Consumer>
+                {(context) => {
+                  return context.content
+                }}
+              </Context.Consumer>
+              <div>
+                <InnerComponent object={null}>InnerComponent</InnerComponent>
+              </div>
+            </Context.Provider>
+          )}
+        </Context.Consumer>
       </App>
     </div>
   )

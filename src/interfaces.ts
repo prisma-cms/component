@@ -23,7 +23,7 @@ export interface PrismaCmsComponentProps {
 
   object?: Record<string, any> | null | undefined
 
-  _dirty?: Partial<PrismaCmsComponentProps["object"]>
+  _dirty?: Partial<PrismaCmsComponentProps['object']>
 
   filters?: Record<string, any> | undefined
 
@@ -48,5 +48,5 @@ export interface PrismaCmsComponentState {
   loading: boolean
 
   // _dirty?: Record<string, any> | null | undefined
-  _dirty?: PrismaCmsComponentProps["_dirty"]
+  _dirty?: PrismaCmsComponentProps['_dirty']
 }

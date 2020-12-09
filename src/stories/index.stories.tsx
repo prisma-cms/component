@@ -13,9 +13,10 @@ import {
 } from '@storybook/addon-docs/blocks'
 // import styled from 'styled-components'
 
-import Context from '@prisma-cms/context'
+// import Context from '@prisma-cms/context'
 
 import Component, { PrismaCmsComponentProps as ComponentProps } from '../'
+// import { useApolloClient } from '@apollo/client'
 
 const title = '@prisma-cms/component/component'
 
@@ -79,27 +80,29 @@ export const customComponent: React.FC = () => {
   )
 }
 
-export const componentWithContext: React.FC = () => {
-  return (
-    <Context.Provider
-      value={{
-        content: 'Some context content',
-      }}
-    >
-      <CustomComponent
-        message="asdas"
-        // data={{
-        //   object: {
-        //     name: 'Test object',
-        //   },
-        // }}
-        object={{
-          name: 'Test object',
-        }}
-      />
-    </Context.Provider>
-  )
-}
+// export const ComponentWithContext: React.FC = () => {
+//   const client = useApolloClient()
+//   return (
+//     <Context.Provider
+//       value={{
+//         client,
+//         content: 'Some context content',
+//       }}
+//     >
+//       <CustomComponent
+//         message="asdas"
+//         // data={{
+//         //   object: {
+//         //     name: 'Test object',
+//         //   },
+//         // }}
+//         object={{
+//           name: 'Test object',
+//         }}
+//       />
+//     </Context.Provider>
+//   )
+// }
 
 const args: Partial<ComponentPropsCustom> = {
   message: 'Test error message',

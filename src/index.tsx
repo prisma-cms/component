@@ -8,12 +8,13 @@ import URI from 'urijs'
 // TODO use more actual module
 import i18n from 'roddeh-i18n'
 
-import Context from '@prisma-cms/context'
+import Context, { PrismaCmsContext } from '@prisma-cms/context'
 import {
   PrismaCmsComponentError,
   PrismaCmsComponentProps,
   PrismaCmsComponentState,
 } from './interfaces'
+import { MutationOptions, QueryOptions } from '@apollo/client'
 export * from './interfaces'
 
 const defaultLocales = {
@@ -33,8 +34,13 @@ const defaultLocales = {
 export default class PrismaCmsComponent<
   P extends PrismaCmsComponentProps = PrismaCmsComponentProps,
   S extends PrismaCmsComponentState = PrismaCmsComponentState
-  > extends PureComponent<P, S> {
+> extends PureComponent<P, S> {
   static contextType = Context
+
+  /**
+   * PrismaCmsContext
+   */
+  declare context: PrismaCmsContext
 
   // static proptTypes = {
   //   locales: PropTypes.object,
@@ -63,8 +69,8 @@ export default class PrismaCmsComponent<
       notifications: [],
     }
 
-    this.canEdit = this.canEdit.bind(this);
-    this.getObject = this.getObject.bind(this);
+    this.canEdit = this.canEdit.bind(this)
+    this.getObject = this.getObject.bind(this)
     this.updateObject = this.updateObject.bind(this)
     this.mutate = this.mutate.bind(this)
 
@@ -111,15 +117,23 @@ export default class PrismaCmsComponent<
     return locales && locales[lang] ? locales[lang](word, options) : word
   }
 
-  query(params: Record<string, any>) {
-    return this.request('query', params)
+  /**
+   * @deprecated Will be remove in next major version
+   */
+  query(params: QueryOptions) {
+    const { client } = this.context
+    return client.query(params)
   }
 
-  mutate(params: Record<string, any>) {
+  mutate(params: MutationOptions) {
     return this.request('mutate', params)
   }
 
-  async request(method: 'query' | 'mutate', params: Record<string, any>) {
+  private async request(method: 'mutate', params: MutationOptions) {
+    if (this.state.loading) {
+      return
+    }
+
     this.setState({
       loading: true,
     })
@@ -179,11 +193,11 @@ export default class PrismaCmsComponent<
     return result
   }
 
-  reloadApiData() {
-    const { loadApiData } = this.context
+  // reloadApiData() {
+  //   const { loadApiData } = this.context
 
-    return loadApiData()
-  }
+  //   loadApiData && loadApiData()
+  // }
 
   renderField(
     field: Record<string, any> & {
@@ -295,18 +309,22 @@ export default class PrismaCmsComponent<
     }
   }
 
-  updateObject(data: P["_dirty"]) {
+  updateObject(data: P['_dirty']) {
     const { _dirty } = this.state
     // const { onChange } = this.props;
 
-    const newDirty = this.prepareDirty(data ? {
-      ..._dirty,
-      ...data,
-    } : data);
+    const newDirty = this.prepareDirty(
+      data
+        ? {
+            ..._dirty,
+            ...data,
+          }
+        : data
+    )
 
     const newState = this.prepareNewState({
       _dirty: newDirty,
-    });
+    })
 
     // this.setState(newState, () => {
     //   onChange && onChange(newDirty);
@@ -315,31 +333,25 @@ export default class PrismaCmsComponent<
     this.setState(newState)
   }
 
-  prepareDirty(data: P["_dirty"]) {
-
-    return data;
+  prepareDirty(data: P['_dirty']) {
+    return data
   }
 
-  prepareNewState(newState: {
-    _dirty: P["_dirty"]
-  }): any {
-
+  prepareNewState(newState: { _dirty: P['_dirty'] }): any {
     // TODO Return partial state
-    return newState;
+    return newState
   }
 
-  getHistory() {
-    const {
-      router: { history },
-    } = this.context
+  // getHistory() {
+  //   const {
+  //     router: { history },
+  //   } = this.context
 
-    return history
-  }
+  //   return history
+  // }
 
   getLocation() {
-    const { location } = this.getHistory()
-
-    return location
+    return global.location
   }
 
   getLocationUri() {
