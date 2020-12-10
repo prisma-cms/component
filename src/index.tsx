@@ -333,12 +333,13 @@ export default class PrismaCmsComponent<
     this.setState(newState)
   }
 
-  prepareDirty(data: P['_dirty']) {
+  prepareDirty(data: P['_dirty']): P['_dirty'] | undefined {
     return data
   }
 
-  prepareNewState(newState: { _dirty: P['_dirty'] }): any {
-    // TODO Return partial state
+  prepareNewState<K extends keyof S>(
+    newState: Pick<S, K> | S | null
+  ): Pick<S, K> | S | null {
     return newState
   }
 
