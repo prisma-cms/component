@@ -13,6 +13,11 @@ export interface PrismaCmsComponentError extends Error {
   _id?: string
 
   open?: boolean
+
+  /**
+   * Ключ поля в API-ошибках
+   */
+  key?: string
 }
 
 interface Locales extends Record<string, any> {}

@@ -227,7 +227,11 @@ export default class PrismaCmsComponent<
     let helperText = helperTextProp
 
     // const error = errors ? errors.find((n) => n.key === name) : null;
-    const error = errors ? errors.find((n) => n.name === name) : null
+    const error = errors
+      ? errors.find((n) =>
+          n.key !== undefined ? n.key === name : n.name === name
+        )
+      : null
 
     // return field;
 
@@ -295,7 +299,9 @@ export default class PrismaCmsComponent<
     const { errors } = this.state
 
     if (errors) {
-      const index = errors.findIndex((error) => error.name === name)
+      const index = errors.findIndex((error) =>
+        error.key !== undefined ? error.key === name : error.name === name
+      )
 
       if (index !== -1) {
         const newErrors = errors.slice(0)
