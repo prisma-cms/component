@@ -6,3 +6,6 @@ dist
 /.storybook
 /storybook-static
 generated
+.vscode
+/packages
+/cypress

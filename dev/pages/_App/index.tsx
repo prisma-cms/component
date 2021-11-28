@@ -2,7 +2,8 @@ import React from 'react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
-import theme from 'dev/theme'
+import theme from '../../theme'
+import { UiGlobalStylesDev } from './styles/GlobalStyle'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -14,6 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <ThemeProvider theme={theme}>
+        <UiGlobalStylesDev />
         <Component {...pageProps} />
       </ThemeProvider>
     </>
