@@ -8,3 +8,7 @@ dist
 generated
 storybook-static
 *.d.ts
+.github
+.vscode
+/packages
+/cypress

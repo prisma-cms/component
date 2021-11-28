@@ -32,3 +32,6 @@ __snapshots__
 
 # next-js
 /.next
+tsconfig.types.tsbuildinfo
+
+.vscode
